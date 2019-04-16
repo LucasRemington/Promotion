@@ -90,7 +90,6 @@ public class LockPoint : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("touched something");
         if (other.CompareTag("AILocker") && triggerPress == true)
         {
             this.transform.parent = other.transform;

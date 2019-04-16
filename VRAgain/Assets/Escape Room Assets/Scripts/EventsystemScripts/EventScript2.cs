@@ -68,8 +68,12 @@ public class EventScript2 : MonoBehaviour {
         }
     }
 
-    public void currentStop (){
-        currentAudio.Stop();
+    public void currentStop ()
+    {
+        if (currentAudio.isPlaying == true)
+        {
+            currentAudio.Stop();
+        }
     }
 
     public void SuccessBeep ()
@@ -77,13 +81,13 @@ public class EventScript2 : MonoBehaviour {
         smallSuccess.Play(0);
     }
 
-
-    public void GameOver()
+    public IEnumerator GameOver()
     {
         Debug.Log("GameOver");
         currentStop();
         currentAudio = gettingFired;
         gettingFired.Play(0);
+        yield return new WaitForSeconds(7f);
         StartCoroutine(fadeToDeath());
     }
 

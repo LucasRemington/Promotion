@@ -10,6 +10,7 @@ public class firstEvent : MonoBehaviour {
     public EventScript2 es2;
     public Animator fadeIn;
     public GameObject vision;
+    public GameObject player;
 
 	void Start () {
 		

@@ -12,6 +12,7 @@ public class GameTimer : MonoBehaviour {
     public AudioSource AIFiveMin;
     public AudioSource AIOneMin;
     public AudioSource AITenSeconds;
+    public AudioSource heartbeat;
     public bool stopTiming;
     public bool fiveMin;
     public bool oneMin;
@@ -43,12 +44,17 @@ public class GameTimer : MonoBehaviour {
     // Calls once per second
     public IEnumerator TimerCount()
     {
+        if (heartbeat.isPlaying == false)
+        {
+            heartbeat.Play(0);
+        }
         yield return new WaitForSeconds(1.0f);
         
         if (startSeconds == 0 && stopTiming == false)
         {
             startMinutes--;
             startSeconds = 59;
+            heartbeat.volume = heartbeat.volume + 0.05f;
         } else if (stopTiming == false)
         {
             startSeconds--;
@@ -64,7 +70,7 @@ public class GameTimer : MonoBehaviour {
         }
         else if (startMinutes == 0 && startSeconds == 10)
         {
-            es2.GameOver();
+            StartCoroutine(es2.GameOver());
 
         }
         if (startSeconds < 10)

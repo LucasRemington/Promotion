@@ -22,6 +22,7 @@ public class fifthEvent : MonoBehaviour {
     public Animator airLock;
     public AudioSource endingAudio;
     public AudioSource suckingAir;
+    public GameObject teleboy;
     public GameObject stars;
 
     public float speed;
@@ -45,6 +46,8 @@ public class fifthEvent : MonoBehaviour {
     public BetterButton bButt;
 
     public GameTimer gTime;
+    public bool TestEnd;
+    public GameObject[] smallOBJ;
 
     public AudioSource correctEnter;
     public AudioSource failEnter;
@@ -82,10 +85,9 @@ public class fifthEvent : MonoBehaviour {
         {
             colorPop[i].SetActive(true);
         }
-        yield return new WaitUntil(() => redPressed == redCodeNumber && bluePressed == blueCodeNumber && greenPressed == greenCodeNumber && yellowPressed == yellowCodeNumber);
+        yield return new WaitUntil(() => (redPressed == redCodeNumber && bluePressed == blueCodeNumber && greenPressed == greenCodeNumber && yellowPressed == yellowCodeNumber) || TestEnd == true);
         es2.longVictory.Play(0);
         thirdE.shipAmb.Stop();
-        endingAudio.Play(0);
         es2.currentStop();
         es2.currentAudio = FiveSuccess[0];
         FiveSuccess[0].Play(0);
@@ -99,18 +101,24 @@ public class fifthEvent : MonoBehaviour {
         es2.currentStop();
         es2.currentAudio = FiveSuccess[1];
         FiveSuccess[1].Play(0);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
+        endingAudio.Play(0);
         suckingAir.Play();
         StartCoroutine(succPlayer());
         stars.GetComponent<ConstantForce>().enabled = true;
+        teleboy.SetActive(false);
         yield return new WaitUntil(() => FiveSuccess[1].isPlaying == false);
-        es2.fadeToDeath();
+        StartCoroutine(es2.fadeToDeath());
     }
 
     public IEnumerator succPlayer ()
     {
-        yield return new WaitForSeconds(0.01f);
+        yield return new WaitForSeconds(0.05f);
         wholeRoom.transform.position = new Vector3(wholeRoom.transform.position.x, wholeRoom.transform.position.y, wholeRoom.transform.position.z + 2.5f);
+        for (int i = 0; i < smallOBJ.Length; i++)
+        {
+            smallOBJ[i].transform.position = new Vector3(smallOBJ[i].transform.position.x, smallOBJ[i].transform.position.y, smallOBJ[i].transform.position.z + 2.5f);
+        }
         StartCoroutine(succPlayer());
     }
 

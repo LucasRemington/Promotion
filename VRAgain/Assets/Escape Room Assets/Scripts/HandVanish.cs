@@ -5,10 +5,11 @@ using UnityEngine;
 public class HandVanish : MonoBehaviour {
 
     public MeshRenderer hand;
+    public GameObject theHand;
 
     private void Update()
     {
-        if (this.transform.childCount == 3)
+        if (theHand.transform.childCount == 0)
         {
             handAppear();
         }
