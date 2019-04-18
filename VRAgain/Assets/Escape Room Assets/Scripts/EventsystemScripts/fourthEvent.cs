@@ -43,7 +43,7 @@ public class fourthEvent : MonoBehaviour {
             Debug.Log(calloutCompare);
             StartCoroutine(CalloutTimer());
         }
-        else if (es2.eventSystem == 4 && lockP.parentName != "TimedTerminal" && calloutCompare >= 20)
+        else if (es2.eventSystem == 4 && lockP.parentName != "TimedTerminal" && lockP.parentName != "ColorsTerminal" && calloutCompare >= 20)
         {
             Debug.Log("called out");
             calloutCompare = 0;

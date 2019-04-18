@@ -19,7 +19,7 @@ public class GameTimer : MonoBehaviour {
 
     public IEnumerator timerCallouts (int time)
     {
-        if (time == 5)
+        if (time == 5 && es2.eventSystem == 3)
         {
             yield return new WaitUntil(() => es2.currentAudio.isPlaying == false);
             yield return new WaitForSeconds(0.1f);
@@ -29,7 +29,7 @@ public class GameTimer : MonoBehaviour {
             es2.currentAudio = AIFiveMin;
             AIFiveMin.Play(0);
             fiveMin = true;
-        } else if (time == 1)
+        } else if (time == 1 && es2.eventSystem == 3)
         {
             yield return new WaitUntil(() => es2.currentAudio.isPlaying == false);
             yield return new WaitForSeconds(0.5f);
